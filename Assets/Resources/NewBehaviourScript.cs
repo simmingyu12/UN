@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,14 @@ using System.Xml;
 public class MusicPlayer : MonoBehaviour
 {
     public TextAsset musicXMLFile; // Unity Resources 폴더에 있는 XML 파일
+    // public TextAsset musicXMLFile = Resources.Load<TextAsset>("SheetMusic");
     private int currentMeasure = 1; // 현재 마디 번호
-    private float lastMeasureTime = 0f; // 마지막 마디 변경 시간
+    private float lastMeasureTime = 5f; // 마지막 마디 변경 시간
 
     private AudioSource audioSource; // AudioSource 컴포넌트
 
     // BPM과 박자 단위
-    private float bpm = 60f;
+    private float bpm = 150f;
     private int beatsPerMeasure = 4; // 4/4 박자
 
     // 마디의 길이 계산
@@ -20,18 +22,16 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
-        // AudioSource 컴포넌트를 가져오기
         audioSource = GetComponent<AudioSource>();
-
-        // 마디의 길이 계산
-        measureLengthInSeconds = 60f / bpm * beatsPerMeasure;
+        measureLengthInSeconds = 150f / bpm * beatsPerMeasure;
 
         if (musicXMLFile != null)
         {
+            // XML 파싱 로직을 여기에 추가하여 악보 데이터 추출
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(musicXMLFile.text);
 
-            // 여기에서 XML 파싱 로직을 구현하여 악보 데이터 추출
+            // 여기에서 XML 파싱 로직을 추가하여 악보 데이터 추출
             // 예를 들어, xmlDoc를 사용하여 음표, 마디, 박자 정보를 추출합니다.
 
             // 음악을 재생
